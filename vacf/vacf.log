@@ -1,0 +1,847 @@
+
+neigh_modify   every 1 delay 0 check yes
+
+units          real
+boundary       p p p
+atom_style     full
+newton         off
+
+### Potential styles
+pair_style     lj/long/coul/long long long 6.0
+WARNING: Using largest cutoff for lj/long/coul/long (src/KSPACE/pair_lj_long_coul_long.cpp:92)
+kspace_style   pppm/disp 1e-4
+kspace_modify  force/disp/real 1e-4 force/disp/kspace 2e-3
+bond_style     harmonic
+angle_style    harmonic
+dihedral_style opls
+special_bonds  lj/coul 0.0 0.0 0.5
+
+#read_data      equil_NPT${CURR}.data
+read_data      equil_NVE1.data
+Reading data file ...
+  orthogonal box = (-22.975977 -22.975977 -22.975977) to (22.975977 22.975977 22.975977)
+  5 by 2 by 2 MPI processor grid
+  reading atoms ...
+  9000 atoms
+  reading velocities ...
+  9000 velocities
+  scanning bonds ...
+  4 = max bonds/atom
+  scanning angles ...
+  10 = max angles/atom
+  scanning dihedrals ...
+  12 = max dihedrals/atom
+  reading bonds ...
+  8000 bonds
+  reading angles ...
+  13000 angles
+  reading dihedrals ...
+  12000 dihedrals
+Finding 1-2 1-3 1-4 neighbors ...
+  special bond factors lj:    0        0        0.5     
+  special bond factors coul:  0        0        0.5     
+     4 = max # of 1-2 neighbors
+     4 = max # of 1-3 neighbors
+     7 = max # of 1-4 neighbors
+     8 = max # of special neighbors
+  special bonds CPU = 0.001 seconds
+  read_data CPU = 0.185 seconds
+
+variable       mols_per_group equal 10
+
+variable       n loop 20
+label          LOOP1
+	variable i1 equal ((${n}-1)*${mols_per_group}+1)
+	variable i1 equal ((1-1)*${mols_per_group}+1)
+	variable i1 equal ((1-1)*10+1)
+	variable i2 equal (${i1}+${mols_per_group}-1)
+	variable i2 equal (1+${mols_per_group}-1)
+	variable i2 equal (1+10-1)
+
+	group sample${n} molecule ${i1}:${i2}
+	group sample1 molecule ${i1}:${i2}
+	group sample1 molecule 1:${i2}
+	group sample1 molecule 1:10
+90 atoms in group sample1
+next           n
+jump           SELF LOOP1
+	variable i1 equal ((${n}-1)*${mols_per_group}+1)
+	variable i1 equal ((2-1)*${mols_per_group}+1)
+	variable i1 equal ((2-1)*10+1)
+	variable i2 equal (${i1}+${mols_per_group}-1)
+	variable i2 equal (11+${mols_per_group}-1)
+	variable i2 equal (11+10-1)
+
+	group sample${n} molecule ${i1}:${i2}
+	group sample2 molecule ${i1}:${i2}
+	group sample2 molecule 11:${i2}
+	group sample2 molecule 11:20
+90 atoms in group sample2
+next           n
+jump           SELF LOOP1
+	variable i1 equal ((${n}-1)*${mols_per_group}+1)
+	variable i1 equal ((3-1)*${mols_per_group}+1)
+	variable i1 equal ((3-1)*10+1)
+	variable i2 equal (${i1}+${mols_per_group}-1)
+	variable i2 equal (21+${mols_per_group}-1)
+	variable i2 equal (21+10-1)
+
+	group sample${n} molecule ${i1}:${i2}
+	group sample3 molecule ${i1}:${i2}
+	group sample3 molecule 21:${i2}
+	group sample3 molecule 21:30
+90 atoms in group sample3
+next           n
+jump           SELF LOOP1
+	variable i1 equal ((${n}-1)*${mols_per_group}+1)
+	variable i1 equal ((4-1)*${mols_per_group}+1)
+	variable i1 equal ((4-1)*10+1)
+	variable i2 equal (${i1}+${mols_per_group}-1)
+	variable i2 equal (31+${mols_per_group}-1)
+	variable i2 equal (31+10-1)
+
+	group sample${n} molecule ${i1}:${i2}
+	group sample4 molecule ${i1}:${i2}
+	group sample4 molecule 31:${i2}
+	group sample4 molecule 31:40
+90 atoms in group sample4
+next           n
+jump           SELF LOOP1
+	variable i1 equal ((${n}-1)*${mols_per_group}+1)
+	variable i1 equal ((5-1)*${mols_per_group}+1)
+	variable i1 equal ((5-1)*10+1)
+	variable i2 equal (${i1}+${mols_per_group}-1)
+	variable i2 equal (41+${mols_per_group}-1)
+	variable i2 equal (41+10-1)
+
+	group sample${n} molecule ${i1}:${i2}
+	group sample5 molecule ${i1}:${i2}
+	group sample5 molecule 41:${i2}
+	group sample5 molecule 41:50
+90 atoms in group sample5
+next           n
+jump           SELF LOOP1
+	variable i1 equal ((${n}-1)*${mols_per_group}+1)
+	variable i1 equal ((6-1)*${mols_per_group}+1)
+	variable i1 equal ((6-1)*10+1)
+	variable i2 equal (${i1}+${mols_per_group}-1)
+	variable i2 equal (51+${mols_per_group}-1)
+	variable i2 equal (51+10-1)
+
+	group sample${n} molecule ${i1}:${i2}
+	group sample6 molecule ${i1}:${i2}
+	group sample6 molecule 51:${i2}
+	group sample6 molecule 51:60
+90 atoms in group sample6
+next           n
+jump           SELF LOOP1
+	variable i1 equal ((${n}-1)*${mols_per_group}+1)
+	variable i1 equal ((7-1)*${mols_per_group}+1)
+	variable i1 equal ((7-1)*10+1)
+	variable i2 equal (${i1}+${mols_per_group}-1)
+	variable i2 equal (61+${mols_per_group}-1)
+	variable i2 equal (61+10-1)
+
+	group sample${n} molecule ${i1}:${i2}
+	group sample7 molecule ${i1}:${i2}
+	group sample7 molecule 61:${i2}
+	group sample7 molecule 61:70
+90 atoms in group sample7
+next           n
+jump           SELF LOOP1
+	variable i1 equal ((${n}-1)*${mols_per_group}+1)
+	variable i1 equal ((8-1)*${mols_per_group}+1)
+	variable i1 equal ((8-1)*10+1)
+	variable i2 equal (${i1}+${mols_per_group}-1)
+	variable i2 equal (71+${mols_per_group}-1)
+	variable i2 equal (71+10-1)
+
+	group sample${n} molecule ${i1}:${i2}
+	group sample8 molecule ${i1}:${i2}
+	group sample8 molecule 71:${i2}
+	group sample8 molecule 71:80
+90 atoms in group sample8
+next           n
+jump           SELF LOOP1
+	variable i1 equal ((${n}-1)*${mols_per_group}+1)
+	variable i1 equal ((9-1)*${mols_per_group}+1)
+	variable i1 equal ((9-1)*10+1)
+	variable i2 equal (${i1}+${mols_per_group}-1)
+	variable i2 equal (81+${mols_per_group}-1)
+	variable i2 equal (81+10-1)
+
+	group sample${n} molecule ${i1}:${i2}
+	group sample9 molecule ${i1}:${i2}
+	group sample9 molecule 81:${i2}
+	group sample9 molecule 81:90
+90 atoms in group sample9
+next           n
+jump           SELF LOOP1
+	variable i1 equal ((${n}-1)*${mols_per_group}+1)
+	variable i1 equal ((10-1)*${mols_per_group}+1)
+	variable i1 equal ((10-1)*10+1)
+	variable i2 equal (${i1}+${mols_per_group}-1)
+	variable i2 equal (91+${mols_per_group}-1)
+	variable i2 equal (91+10-1)
+
+	group sample${n} molecule ${i1}:${i2}
+	group sample10 molecule ${i1}:${i2}
+	group sample10 molecule 91:${i2}
+	group sample10 molecule 91:100
+90 atoms in group sample10
+next           n
+jump           SELF LOOP1
+	variable i1 equal ((${n}-1)*${mols_per_group}+1)
+	variable i1 equal ((11-1)*${mols_per_group}+1)
+	variable i1 equal ((11-1)*10+1)
+	variable i2 equal (${i1}+${mols_per_group}-1)
+	variable i2 equal (101+${mols_per_group}-1)
+	variable i2 equal (101+10-1)
+
+	group sample${n} molecule ${i1}:${i2}
+	group sample11 molecule ${i1}:${i2}
+	group sample11 molecule 101:${i2}
+	group sample11 molecule 101:110
+90 atoms in group sample11
+next           n
+jump           SELF LOOP1
+	variable i1 equal ((${n}-1)*${mols_per_group}+1)
+	variable i1 equal ((12-1)*${mols_per_group}+1)
+	variable i1 equal ((12-1)*10+1)
+	variable i2 equal (${i1}+${mols_per_group}-1)
+	variable i2 equal (111+${mols_per_group}-1)
+	variable i2 equal (111+10-1)
+
+	group sample${n} molecule ${i1}:${i2}
+	group sample12 molecule ${i1}:${i2}
+	group sample12 molecule 111:${i2}
+	group sample12 molecule 111:120
+90 atoms in group sample12
+next           n
+jump           SELF LOOP1
+	variable i1 equal ((${n}-1)*${mols_per_group}+1)
+	variable i1 equal ((13-1)*${mols_per_group}+1)
+	variable i1 equal ((13-1)*10+1)
+	variable i2 equal (${i1}+${mols_per_group}-1)
+	variable i2 equal (121+${mols_per_group}-1)
+	variable i2 equal (121+10-1)
+
+	group sample${n} molecule ${i1}:${i2}
+	group sample13 molecule ${i1}:${i2}
+	group sample13 molecule 121:${i2}
+	group sample13 molecule 121:130
+90 atoms in group sample13
+next           n
+jump           SELF LOOP1
+	variable i1 equal ((${n}-1)*${mols_per_group}+1)
+	variable i1 equal ((14-1)*${mols_per_group}+1)
+	variable i1 equal ((14-1)*10+1)
+	variable i2 equal (${i1}+${mols_per_group}-1)
+	variable i2 equal (131+${mols_per_group}-1)
+	variable i2 equal (131+10-1)
+
+	group sample${n} molecule ${i1}:${i2}
+	group sample14 molecule ${i1}:${i2}
+	group sample14 molecule 131:${i2}
+	group sample14 molecule 131:140
+90 atoms in group sample14
+next           n
+jump           SELF LOOP1
+	variable i1 equal ((${n}-1)*${mols_per_group}+1)
+	variable i1 equal ((15-1)*${mols_per_group}+1)
+	variable i1 equal ((15-1)*10+1)
+	variable i2 equal (${i1}+${mols_per_group}-1)
+	variable i2 equal (141+${mols_per_group}-1)
+	variable i2 equal (141+10-1)
+
+	group sample${n} molecule ${i1}:${i2}
+	group sample15 molecule ${i1}:${i2}
+	group sample15 molecule 141:${i2}
+	group sample15 molecule 141:150
+90 atoms in group sample15
+next           n
+jump           SELF LOOP1
+	variable i1 equal ((${n}-1)*${mols_per_group}+1)
+	variable i1 equal ((16-1)*${mols_per_group}+1)
+	variable i1 equal ((16-1)*10+1)
+	variable i2 equal (${i1}+${mols_per_group}-1)
+	variable i2 equal (151+${mols_per_group}-1)
+	variable i2 equal (151+10-1)
+
+	group sample${n} molecule ${i1}:${i2}
+	group sample16 molecule ${i1}:${i2}
+	group sample16 molecule 151:${i2}
+	group sample16 molecule 151:160
+90 atoms in group sample16
+next           n
+jump           SELF LOOP1
+	variable i1 equal ((${n}-1)*${mols_per_group}+1)
+	variable i1 equal ((17-1)*${mols_per_group}+1)
+	variable i1 equal ((17-1)*10+1)
+	variable i2 equal (${i1}+${mols_per_group}-1)
+	variable i2 equal (161+${mols_per_group}-1)
+	variable i2 equal (161+10-1)
+
+	group sample${n} molecule ${i1}:${i2}
+	group sample17 molecule ${i1}:${i2}
+	group sample17 molecule 161:${i2}
+	group sample17 molecule 161:170
+90 atoms in group sample17
+next           n
+jump           SELF LOOP1
+	variable i1 equal ((${n}-1)*${mols_per_group}+1)
+	variable i1 equal ((18-1)*${mols_per_group}+1)
+	variable i1 equal ((18-1)*10+1)
+	variable i2 equal (${i1}+${mols_per_group}-1)
+	variable i2 equal (171+${mols_per_group}-1)
+	variable i2 equal (171+10-1)
+
+	group sample${n} molecule ${i1}:${i2}
+	group sample18 molecule ${i1}:${i2}
+	group sample18 molecule 171:${i2}
+	group sample18 molecule 171:180
+90 atoms in group sample18
+next           n
+jump           SELF LOOP1
+	variable i1 equal ((${n}-1)*${mols_per_group}+1)
+	variable i1 equal ((19-1)*${mols_per_group}+1)
+	variable i1 equal ((19-1)*10+1)
+	variable i2 equal (${i1}+${mols_per_group}-1)
+	variable i2 equal (181+${mols_per_group}-1)
+	variable i2 equal (181+10-1)
+
+	group sample${n} molecule ${i1}:${i2}
+	group sample19 molecule ${i1}:${i2}
+	group sample19 molecule 181:${i2}
+	group sample19 molecule 181:190
+90 atoms in group sample19
+next           n
+jump           SELF LOOP1
+	variable i1 equal ((${n}-1)*${mols_per_group}+1)
+	variable i1 equal ((20-1)*${mols_per_group}+1)
+	variable i1 equal ((20-1)*10+1)
+	variable i2 equal (${i1}+${mols_per_group}-1)
+	variable i2 equal (191+${mols_per_group}-1)
+	variable i2 equal (191+10-1)
+
+	group sample${n} molecule ${i1}:${i2}
+	group sample20 molecule ${i1}:${i2}
+	group sample20 molecule 191:${i2}
+	group sample20 molecule 191:200
+90 atoms in group sample20
+next           n
+jump           SELF LOOP1
+
+#group          sample molecule 1:50
+#group          sample molecule 1:200
+
+timestep       1.6
+run_style      respa 4 2 2 2 bond 1 dihedral 2 pair 3 kspace 4
+Respa levels:
+  1 = bond angle
+  2 = dihedral improper
+  3 = pair
+  4 = kspace
+
+thermo         500
+thermo_style   custom step temp pe etotal enthalpy press vol density
+
+#fix            1 all npt iso 0.0 0.0 $(1000*dt) temp 300 300 $(100*dt)
+fix            1 all nve
+
+#run            500000
+
+#write_data     equil_NVE1.data
+
+#dump           1 sample custom 1 positions0.dump  id mol type xu yu zu
+
+variable       n loop 20
+label          LOOP2
+	variable dump_id equal (${n}+0)
+	variable dump_id equal (1+0)
+	dump ${dump_id} sample${n} custom 1 velocities${n}.dump id type vx vy vz
+	dump 1 sample${n} custom 1 velocities${n}.dump id type vx vy vz
+	dump 1 sample1 custom 1 velocities${n}.dump id type vx vy vz
+	dump 1 sample1 custom 1 velocities1.dump id type vx vy vz
+next           n
+jump           SELF LOOP2
+	variable dump_id equal (${n}+0)
+	variable dump_id equal (2+0)
+	dump ${dump_id} sample${n} custom 1 velocities${n}.dump id type vx vy vz
+	dump 2 sample${n} custom 1 velocities${n}.dump id type vx vy vz
+	dump 2 sample2 custom 1 velocities${n}.dump id type vx vy vz
+	dump 2 sample2 custom 1 velocities2.dump id type vx vy vz
+next           n
+jump           SELF LOOP2
+	variable dump_id equal (${n}+0)
+	variable dump_id equal (3+0)
+	dump ${dump_id} sample${n} custom 1 velocities${n}.dump id type vx vy vz
+	dump 3 sample${n} custom 1 velocities${n}.dump id type vx vy vz
+	dump 3 sample3 custom 1 velocities${n}.dump id type vx vy vz
+	dump 3 sample3 custom 1 velocities3.dump id type vx vy vz
+next           n
+jump           SELF LOOP2
+	variable dump_id equal (${n}+0)
+	variable dump_id equal (4+0)
+	dump ${dump_id} sample${n} custom 1 velocities${n}.dump id type vx vy vz
+	dump 4 sample${n} custom 1 velocities${n}.dump id type vx vy vz
+	dump 4 sample4 custom 1 velocities${n}.dump id type vx vy vz
+	dump 4 sample4 custom 1 velocities4.dump id type vx vy vz
+next           n
+jump           SELF LOOP2
+	variable dump_id equal (${n}+0)
+	variable dump_id equal (5+0)
+	dump ${dump_id} sample${n} custom 1 velocities${n}.dump id type vx vy vz
+	dump 5 sample${n} custom 1 velocities${n}.dump id type vx vy vz
+	dump 5 sample5 custom 1 velocities${n}.dump id type vx vy vz
+	dump 5 sample5 custom 1 velocities5.dump id type vx vy vz
+next           n
+jump           SELF LOOP2
+	variable dump_id equal (${n}+0)
+	variable dump_id equal (6+0)
+	dump ${dump_id} sample${n} custom 1 velocities${n}.dump id type vx vy vz
+	dump 6 sample${n} custom 1 velocities${n}.dump id type vx vy vz
+	dump 6 sample6 custom 1 velocities${n}.dump id type vx vy vz
+	dump 6 sample6 custom 1 velocities6.dump id type vx vy vz
+next           n
+jump           SELF LOOP2
+	variable dump_id equal (${n}+0)
+	variable dump_id equal (7+0)
+	dump ${dump_id} sample${n} custom 1 velocities${n}.dump id type vx vy vz
+	dump 7 sample${n} custom 1 velocities${n}.dump id type vx vy vz
+	dump 7 sample7 custom 1 velocities${n}.dump id type vx vy vz
+	dump 7 sample7 custom 1 velocities7.dump id type vx vy vz
+next           n
+jump           SELF LOOP2
+	variable dump_id equal (${n}+0)
+	variable dump_id equal (8+0)
+	dump ${dump_id} sample${n} custom 1 velocities${n}.dump id type vx vy vz
+	dump 8 sample${n} custom 1 velocities${n}.dump id type vx vy vz
+	dump 8 sample8 custom 1 velocities${n}.dump id type vx vy vz
+	dump 8 sample8 custom 1 velocities8.dump id type vx vy vz
+next           n
+jump           SELF LOOP2
+	variable dump_id equal (${n}+0)
+	variable dump_id equal (9+0)
+	dump ${dump_id} sample${n} custom 1 velocities${n}.dump id type vx vy vz
+	dump 9 sample${n} custom 1 velocities${n}.dump id type vx vy vz
+	dump 9 sample9 custom 1 velocities${n}.dump id type vx vy vz
+	dump 9 sample9 custom 1 velocities9.dump id type vx vy vz
+next           n
+jump           SELF LOOP2
+	variable dump_id equal (${n}+0)
+	variable dump_id equal (10+0)
+	dump ${dump_id} sample${n} custom 1 velocities${n}.dump id type vx vy vz
+	dump 10 sample${n} custom 1 velocities${n}.dump id type vx vy vz
+	dump 10 sample10 custom 1 velocities${n}.dump id type vx vy vz
+	dump 10 sample10 custom 1 velocities10.dump id type vx vy vz
+next           n
+jump           SELF LOOP2
+	variable dump_id equal (${n}+0)
+	variable dump_id equal (11+0)
+	dump ${dump_id} sample${n} custom 1 velocities${n}.dump id type vx vy vz
+	dump 11 sample${n} custom 1 velocities${n}.dump id type vx vy vz
+	dump 11 sample11 custom 1 velocities${n}.dump id type vx vy vz
+	dump 11 sample11 custom 1 velocities11.dump id type vx vy vz
+next           n
+jump           SELF LOOP2
+	variable dump_id equal (${n}+0)
+	variable dump_id equal (12+0)
+	dump ${dump_id} sample${n} custom 1 velocities${n}.dump id type vx vy vz
+	dump 12 sample${n} custom 1 velocities${n}.dump id type vx vy vz
+	dump 12 sample12 custom 1 velocities${n}.dump id type vx vy vz
+	dump 12 sample12 custom 1 velocities12.dump id type vx vy vz
+next           n
+jump           SELF LOOP2
+	variable dump_id equal (${n}+0)
+	variable dump_id equal (13+0)
+	dump ${dump_id} sample${n} custom 1 velocities${n}.dump id type vx vy vz
+	dump 13 sample${n} custom 1 velocities${n}.dump id type vx vy vz
+	dump 13 sample13 custom 1 velocities${n}.dump id type vx vy vz
+	dump 13 sample13 custom 1 velocities13.dump id type vx vy vz
+next           n
+jump           SELF LOOP2
+	variable dump_id equal (${n}+0)
+	variable dump_id equal (14+0)
+	dump ${dump_id} sample${n} custom 1 velocities${n}.dump id type vx vy vz
+	dump 14 sample${n} custom 1 velocities${n}.dump id type vx vy vz
+	dump 14 sample14 custom 1 velocities${n}.dump id type vx vy vz
+	dump 14 sample14 custom 1 velocities14.dump id type vx vy vz
+next           n
+jump           SELF LOOP2
+	variable dump_id equal (${n}+0)
+	variable dump_id equal (15+0)
+	dump ${dump_id} sample${n} custom 1 velocities${n}.dump id type vx vy vz
+	dump 15 sample${n} custom 1 velocities${n}.dump id type vx vy vz
+	dump 15 sample15 custom 1 velocities${n}.dump id type vx vy vz
+	dump 15 sample15 custom 1 velocities15.dump id type vx vy vz
+next           n
+jump           SELF LOOP2
+	variable dump_id equal (${n}+0)
+	variable dump_id equal (16+0)
+	dump ${dump_id} sample${n} custom 1 velocities${n}.dump id type vx vy vz
+	dump 16 sample${n} custom 1 velocities${n}.dump id type vx vy vz
+	dump 16 sample16 custom 1 velocities${n}.dump id type vx vy vz
+	dump 16 sample16 custom 1 velocities16.dump id type vx vy vz
+next           n
+jump           SELF LOOP2
+	variable dump_id equal (${n}+0)
+	variable dump_id equal (17+0)
+	dump ${dump_id} sample${n} custom 1 velocities${n}.dump id type vx vy vz
+	dump 17 sample${n} custom 1 velocities${n}.dump id type vx vy vz
+	dump 17 sample17 custom 1 velocities${n}.dump id type vx vy vz
+	dump 17 sample17 custom 1 velocities17.dump id type vx vy vz
+next           n
+jump           SELF LOOP2
+	variable dump_id equal (${n}+0)
+	variable dump_id equal (18+0)
+	dump ${dump_id} sample${n} custom 1 velocities${n}.dump id type vx vy vz
+	dump 18 sample${n} custom 1 velocities${n}.dump id type vx vy vz
+	dump 18 sample18 custom 1 velocities${n}.dump id type vx vy vz
+	dump 18 sample18 custom 1 velocities18.dump id type vx vy vz
+next           n
+jump           SELF LOOP2
+	variable dump_id equal (${n}+0)
+	variable dump_id equal (19+0)
+	dump ${dump_id} sample${n} custom 1 velocities${n}.dump id type vx vy vz
+	dump 19 sample${n} custom 1 velocities${n}.dump id type vx vy vz
+	dump 19 sample19 custom 1 velocities${n}.dump id type vx vy vz
+	dump 19 sample19 custom 1 velocities19.dump id type vx vy vz
+next           n
+jump           SELF LOOP2
+	variable dump_id equal (${n}+0)
+	variable dump_id equal (20+0)
+	dump ${dump_id} sample${n} custom 1 velocities${n}.dump id type vx vy vz
+	dump 20 sample${n} custom 1 velocities${n}.dump id type vx vy vz
+	dump 20 sample20 custom 1 velocities${n}.dump id type vx vy vz
+	dump 20 sample20 custom 1 velocities20.dump id type vx vy vz
+next           n
+jump           SELF LOOP2
+
+run            131071 # 2^17 - 1
+PPPMDisp initialization ...
+Generated 15 of 15 mixed pair_coeff terms from geometric mixing rule
+  Coulomb G vector (1/distance)= 0.3976395358034154
+  Coulomb grid = 30 30 30
+  Coulomb stencil order = 5
+  Coulomb estimated absolute RMS force accuracy = 0.031176193
+  Coulomb estimated relative force accuracy = 9.3886178e-05
+  using double precision FFTW3
+  3d grid and FFT values/proc = 6292 1800
+  Dispersion G vector (1/distance)= 0.5295435587565104
+  Dispersion grid = 48 48 48
+  Dispersion stencil order = 5
+  Dispersion estimated absolute RMS force accuracy = 0.0011333205
+  Dispersion estimated relative force accuracy = 3.4129611e-06
+  using double precision FFTW3
+  3d grid and FFT values/proc = 16337 6912
+Generated 15 of 15 mixed pair_coeff terms from geometric mixing rule
+Last active /omp style is kspace_style pppm/disp/omp
+Neighbor list info ...
+  update: every = 1 steps, delay = 0 steps, check = yes
+  max neighbors/atom: 2000, page size: 100000
+  master list distance cutoff = 8
+  ghost atom cutoff = 8
+  binsize = 4, bins = 12 12 12
+  1 neighbor lists, perpetual/occasional/extra = 1 0 0
+  (1) pair lj/long/coul/long/omp, perpetual
+      attributes: half, newton off, omp
+      pair build: half/bin/newtoff/omp
+      stencil: full/bin/3d
+      bin: standard
+Per MPI rank memory allocation (min/avg/max) = 30.67 | 33.24 | 34.83 Mbytes
+   Step          Temp          PotEng         TotEng        Enthalpy        Press          Volume        Density    
+         0   308.89109     -2654.4879      5631.3022      6742.4179      785.18404      97031.318      0.78837203   
+       500   310.79364     -2704.764       5632.0608      7066.3727      1013.5747      97031.318      0.78837203   
+      1000   304.94343     -2545.5813      5634.3158      3927.1234     -1206.4092      97031.318      0.78837203   
+      1500   306.31488     -2582.3216      5634.3636      6540.0572      640.01985      97031.318      0.78837203   
+      2000   305.78498     -2569.0219      5633.4491      6703.7257      756.3246       97031.318      0.78837203   
+      2500   309.91754     -2679.5098      5633.8143      6148.4642      363.68389      97031.318      0.78837203   
+      3000   308.34659     -2634.4163      5636.7682      6518.5332      623.1105       97031.318      0.78837203   
+      3500   307.951       -2623.6362      5636.9368      6297.265       466.62928      97031.318      0.78837203   
+      4000   304.55717     -2530.9884      5638.5474      4705.6151     -659.26849      97031.318      0.78837203   
+      4500   308.15186     -2628.3039      5637.6569      6033.425       279.67456      97031.318      0.78837203   
+      5000   309.56061     -2664.9441      5638.8055      5272.7808     -258.65603      97031.318      0.78837203   
+      5500   309.4538      -2663.1862      5637.6985      5194.7894     -312.98732      97031.318      0.78837203   
+      6000   308.66425     -2641.476       5638.2294      6345.4235      499.74775      97031.318      0.78837203   
+      6500   306.00422     -2567.6642      5640.6877      5968.4452      231.61399      97031.318      0.78837203   
+      7000   307.03533     -2594.6887      5641.322       6295.2096      462.07803      97031.318      0.78837203   
+      7500   309.3211      -2655.3186      5642.0062      5466.6622     -123.90909      97031.318      0.78837203   
+      8000   305.42932     -2551.7521      5641.1787      6736.8439      774.26578      97031.318      0.78837203   
+      8500   308.13618     -2624.4081      5641.1322      4631.9427     -713.15662      97031.318      0.78837203   
+      9000   308.25926     -2628.0334      5640.8083      4330.4111     -926.00888      97031.318      0.78837203   
+      9500   306.28885     -2575.9991      5639.9878      6111.0054      332.85061      97031.318      0.78837203   
+     10000   310.1617      -2678.583       5641.2904      5670.5216      20.656575      97031.318      0.78837203   
+     10500   307.30682     -2601.7857      5641.5076      6242.9485      425.01586      97031.318      0.78837203   
+     11000   309.5145      -2661.6443      5640.8685      5841.0809      141.48268      97031.318      0.78837203   
+     11500   308.8873      -2645.044       5640.6445      4902.0223     -521.95675      97031.318      0.78837203   
+     12000   312.48963     -2739.7651      5642.5536      6022.8427      268.73616      97031.318      0.78837203   
+     12500   305.29402     -2546.2588      5643.0424      6050.3343      287.81798      97031.318      0.78837203   
+     13000   305.77993     -2559.2076      5643.128       6896.7721      885.90356      97031.318      0.78837203   
+     13500   310.06024     -2675.0318      5642.12        5109.5623     -376.33869      97031.318      0.78837203   
+     14000   313.15634     -2758.5293      5641.6733      5692.1754      35.687981      97031.318      0.78837203   
+     14500   306.28575     -2572.9744      5642.9294      6407.6791      540.4201       97031.318      0.78837203   
+     15000   312.26428     -2734.1024      5642.1712      5313.3737     -232.34898      97031.318      0.78837203   
+     15500   308.69037     -2638.6243      5641.7817      5547.9787     -66.287079      97031.318      0.78837203   
+     16000   309.68422     -2662.2012      5644.8642      5532.0806     -79.699986      97031.318      0.78837203   
+     16500   308.94551     -2643.962       5643.288       6156.2917      362.5206       97031.318      0.78837203   
+     17000   308.96734     -2643.9291      5643.9066      6828.1074      836.83052      97031.318      0.78837203   
+     17500   310.03458     -2670.7468      5645.7167      6524.8573      621.25592      97031.318      0.78837203   
+     18000   303.64542     -2498.8933      5646.1854      5051.468      -420.26459      97031.318      0.78837203   
+     18500   305.17412     -2537.359       5648.726       6019.1325      261.75248      97031.318      0.78837203   
+     19000   312.86938     -2744.8409      5647.6641      6354.406       499.42816      97031.318      0.78837203   
+     19500   305.71624     -2551.8486      5648.7786      5750.3031      71.743589      97031.318      0.78837203   
+     20000   305.97594     -2558.564       5649.0295      7285.796       1156.6419      97031.318      0.78837203   
+     20500   307.22661     -2589.835       5651.3066      4960.2539     -488.34121      97031.318      0.78837203   
+     21000   305.32084     -2537.6739      5652.3468      7219.8516      1107.6972      97031.318      0.78837203   
+     21500   306.80643     -2576.7358      5653.1348      5702.7087      35.032002      97031.318      0.78837203   
+     22000   308.97681     -2633.5678      5654.5218      5841.4474      132.09334      97031.318      0.78837203   
+     22500   311.0473      -2690.444       5653.1851      5166.3808     -344.00647      97031.318      0.78837203   
+     23000   306.14081     -2557.1965      5654.8194      5666.5177      8.2667978      97031.318      0.78837203   
+     23500   308.68032     -2623.7449      5656.3916      6198.2172      382.88795      97031.318      0.78837203   
+     24000   310.9822      -2686.0232      5655.8595      5667.9381      8.5354614      97031.318      0.78837203   
+     24500   307.69352     -2594.916       5658.7501      5844.1698      131.02917      97031.318      0.78837203   
+     25000   311.11893     -2687.2882      5658.2623      6024.7012      258.94866      97031.318      0.78837203   
+     25500   309.22475     -2636.6712      5658.0692      6342.4195      483.60481      97031.318      0.78837203   
+     26000   305.5903      -2537.9467      5659.3021      6631.6747      687.13948      97031.318      0.78837203   
+     26500   306.01869     -2549.1381      5659.6019      5658.0817     -1.0742912      97031.318      0.78837203   
+     27000   309.29991     -2637.4616      5659.295       5720.5823      43.309516      97031.318      0.78837203   
+     27500   308.52424     -2616.2179      5659.7319      5202.0045     -323.45887      97031.318      0.78837203   
+     28000   308.31219     -2611.0294      5659.2324      6789.1021      798.43684      97031.318      0.78837203   
+     28500   307.5242      -2588.0339      5661.0905      5247.5282     -292.24909      97031.318      0.78837203   
+     29000   309.97458     -2653.0333      5661.8207      5843.2413      128.20317      97031.318      0.78837203   
+     29500   306.33061     -2556.6842      5660.4229      6284.7944      441.22006      97031.318      0.78837203   
+     30000   307.6925      -2593.7416      5659.8974      6778.5182      790.48762      97031.318      0.78837203   
+     30500   306.85993     -2568.6711      5662.6347      5067.4925     -420.56483      97031.318      0.78837203   
+     31000   307.22796     -2578.0329      5663.1451      7402.6884      1229.2704      97031.318      0.78837203   
+     31500   309.25216     -2633.3063      5662.1695      4796.3576     -611.83698      97031.318      0.78837203   
+     32000   308.55314     -2612.5341      5664.1909      7112.7862      1023.6683      97031.318      0.78837203   
+     32500   307.16346     -2573.8437      5665.6041      5376.901      -204.01569      97031.318      0.78837203   
+     33000   308.11186     -2599.7845      5665.1035      8040.5307      1678.6258      97031.318      0.78837203   
+     33500   307.59838     -2586.5846      5664.5295      6502.7254      592.32174      97031.318      0.78837203   
+     34000   309.64414     -2639.0524      5666.938       6526.3771      607.33357      97031.318      0.78837203   
+     34500   309.10302     -2624.1602      5667.315       5916.9933      176.43839      97031.318      0.78837203   
+     35000   307.94499     -2595.0615      5665.3503      5844.2805      126.44332      97031.318      0.78837203   
+     35500   311.18404     -2681.4203      5665.8768      6006.449       240.66964      97031.318      0.78837203   
+     36000   307.09025     -2571.126       5666.3581      5054.2738     -432.53715      97031.318      0.78837203   
+     36500   307.35809     -2575.486       5669.1825      6140.7199      333.21789      97031.318      0.78837203   
+     37000   309.71451     -2640.1294      5667.7487      6384.1156      506.22983      97031.318      0.78837203   
+     37500   309.95346     -2645.9655      5668.322       5525.9925     -100.57896      97031.318      0.78837203   
+     38000   310.12058     -2649.6697      5669.1008      5509.5684     -112.7356       97031.318      0.78837203   
+     38500   306.9742      -2568.292       5666.0789      4370.0593     -915.84873      97031.318      0.78837203   
+     39000   310.82915     -2670.0389      5667.7385      5443.706      -158.31545      97031.318      0.78837203   
+     39500   309.00528     -2621.36        5667.4932      5642.6414     -17.561867      97031.318      0.78837203   
+     40000   310.74329     -2668.2366      5667.2375      5759.6937      65.335383      97031.318      0.78837203   
+     40500   309.69187     -2639.8111      5667.4594      6572.8797      639.82677      97031.318      0.78837203   
+     41000   310.33315     -2655.3212      5669.1512      5985.1195      223.28304      97031.318      0.78837203   
+     41500   308.82151     -2615.2459      5668.6779      5145.2395     -369.89439      97031.318      0.78837203   
+     42000   310.44271     -2656.8822      5670.5291      5829.9472      112.65482      97031.318      0.78837203   
+     42500   310.12716     -2647.1304      5671.8167      5247.5625     -299.80459      97031.318      0.78837203   
+     43000   309.13109     -2619.0149      5673.2133      4015.947      -1171.1283      97031.318      0.78837203   
+     43500   310.57944     -2659.228       5671.8511      6012.1517      240.47772      97031.318      0.78837203   
+     44000   311.13802     -2674.2597      5671.8029      5424.3162     -174.88967      97031.318      0.78837203   
+     44500   311.06942     -2672.2379      5671.9846      5338.1007     -235.94329      97031.318      0.78837203   
+     45000   310.21709     -2648.3279      5673.0315      5325.5096     -245.58075      97031.318      0.78837203   
+     45500   309.24729     -2624.2035      5671.1417      5084.446      -414.59597      97031.318      0.78837203   
+     46000   307.84699     -2583.6957      5674.0874      4814.8416     -607.19698      97031.318      0.78837203   
+     46500   307.53383     -2576.5757      5672.8071      4860.4626     -574.05355      97031.318      0.78837203   
+     47000   309.90034     -2638.5312      5674.3314      6217.0745      383.53634      97031.318      0.78837203   
+     47500   311.96937     -2695.506       5672.8569      5169.7246     -355.54487      97031.318      0.78837203   
+     48000   309.75007     -2634.2643      5674.5676      6008.5066      235.98221      97031.318      0.78837203   
+     48500   310.70418     -2659.8723      5674.5529      5723.4011      34.519206      97031.318      0.78837203   
+     49000   307.40673     -2570.5042      5675.4693      6282.8148      429.18847      97031.318      0.78837203   
+     49500   309.80214     -2634.9654      5675.2632      5823.2826      104.59982      97031.318      0.78837203   
+     50000   310.1629      -2645.2377      5674.6681      5634.2995     -28.527008      97031.318      0.78837203   
+     50500   308.37455     -2596.8139      5675.1204      5329.9543     -243.91604      97031.318      0.78837203   
+     51000   310.35477     -2649.391       5675.6616      5954.8955      197.32421      97031.318      0.78837203   
+     51500   308.22774     -2590.9873      5677.0091      6705.6325      726.88985      97031.318      0.78837203   
+     52000   307.15452     -2563.3458      5675.8621      5959.331       200.31695      97031.318      0.78837203   
+     52500   307.55044     -2572.9035      5676.9247      5355.8605     -226.88411      97031.318      0.78837203   
+     53000   308.90132     -2608.3575      5677.7071      5206.1754     -333.21385      97031.318      0.78837203   
+     53500   308.08423     -2586.8189      5677.3279      5652.0216     -17.882997      97031.318      0.78837203   
+     54000   308.21925     -2590.9496      5676.819       6393.3118      506.31877      97031.318      0.78837203   
+     54500   309.76637     -2631.5473      5677.7217      5976.8927      211.41303      97031.318      0.78837203   
+     55000   306.71047     -2546.4625      5680.8342      5170.8404     -360.39363      97031.318      0.78837203   
+     55500   311.23379     -2669.2789      5679.3527      6169.1378      346.11287      97031.318      0.78837203   
+     56000   310.12695     -2639.3245      5679.6168      5654.5348     -17.724479      97031.318      0.78837203   
+     56500   313.54805     -2731.4364      5679.2735      4823.3534     -604.84685      97031.318      0.78837203   
+     57000   308.65251     -2600.0957      5679.2948      4606.2607     -758.27317      97031.318      0.78837203   
+     57500   308.55102     -2597.4499      5679.2182      6140.056       325.65688      97031.318      0.78837203   
+     58000   308.86263     -2605.0932      5679.9337      5501.2379     -126.27764      97031.318      0.78837203   
+     58500   309.02802     -2609.7882      5679.675       6289.1998      430.72845      97031.318      0.78837203   
+     59000   311.79139     -2683.7891      5679.7997      6036.9083      252.35537      97031.318      0.78837203   
+     59500   310.53475     -2649.9502      5679.93        6734.8676      745.48508      97031.318      0.78837203   
+     60000   310.07807     -2636.68        5680.9502      6068.3439      273.75668      97031.318      0.78837203   
+     60500   309.61535     -2622.3719      5682.8461      6653.8196      686.15076      97031.318      0.78837203   
+     61000   307.96478     -2577.5022      5683.4405      5988.4497      215.53866      97031.318      0.78837203   
+     61500   310.68696     -2649.6312      5684.3321      5935.986       177.83442      97031.318      0.78837203   
+     62000   307.25286     -2556.5674      5685.2785      6559.6367      617.87631      97031.318      0.78837203   
+     62500   310.24187     -2637.2535      5684.7704      5357.2015     -231.48075      97031.318      0.78837203   
+     63000   307.20136     -2555.2374      5685.2271      7260.3569      1113.0855      97031.318      0.78837203   
+     63500   312.33783     -2693.3441      5684.9026      5553.7531     -92.678447      97031.318      0.78837203   
+     64000   308.78528     -2597.5373      5685.4145      5719.9915      24.434271      97031.318      0.78837203   
+     64500   309.83585     -2624.5879      5686.545       4803.5297     -623.994        97031.318      0.78837203   
+     65000   306.99862     -2548.1282      5686.8979      6503.158       576.82059      97031.318      0.78837203   
+     65500   308.46681     -2588.3122      5686.0971      4963.183      -510.85647      97031.318      0.78837203   
+     66000   308.87511     -2598.3729      5686.9888      6172.638       343.19016      97031.318      0.78837203   
+     66500   310.54985     -2642.1274      5688.158       5331.108      -252.31395      97031.318      0.78837203   
+     67000   306.11443     -2520.4466      5690.8615      6497.3603      569.92265      97031.318      0.78837203   
+     67500   308.00756     -2574.0375      5688.0527      5126.6435     -396.72694      97031.318      0.78837203   
+     68000   312.17605     -2683.9058      5690.0013      5347.2186     -242.23178      97031.318      0.78837203   
+     68500   309.80972     -2621.4646      5688.9673      6258.5232      402.48389      97031.318      0.78837203   
+     69000   306.63184     -2533.9848      5691.2027      6493.6185      567.03734      97031.318      0.78837203   
+     69500   305.91864     -2515.655       5690.4012      6645.6943      675.06996      97031.318      0.78837203   
+     70000   306.88171     -2540.8734      5691.0166      5455.8559     -166.17933      97031.318      0.78837203   
+     70500   310.57564     -2641.3524      5689.6246      7114.6304      1006.9985      97031.318      0.78837203   
+     71000   308.22388     -2578.3773      5689.5154      3746.0575     -1373.3692      97031.318      0.78837203   
+     71500   308.86492     -2595.1088      5689.9795      7412.2427      1217.0592      97031.318      0.78837203   
+     72000   311.90467     -2676.8059      5689.8215      5956.1943      188.2357       97031.318      0.78837203   
+     72500   306.76807     -2536.2403      5692.6013      6377.5232      484.00879      97031.318      0.78837203   
+     73000   308.47113     -2583.6616      5690.8636      6242.3359      389.70494      97031.318      0.78837203   
+     73500   309.62826     -2612.9949      5692.5695      5979.7986      202.97408      97031.318      0.78837203   
+     74000   312.81219     -2697.6392      5693.3319      6141.5249      316.72128      97031.318      0.78837203   
+     74500   307.46557     -2556.3097      5691.242       5564.5932     -89.497966      97031.318      0.78837203   
+     75000   313.72271     -2724.1804      5691.2148      5536.0968     -109.61607      97031.318      0.78837203   
+     75500   307.10517     -2546.0793      5691.8048      4502.6516     -840.33019      97031.318      0.78837203   
+     76000   307.47139     -2555.8412      5691.8665      5012.3581     -480.18323      97031.318      0.78837203   
+     76500   309.04419     -2597.248       5692.649       5419.7232     -192.86645      97031.318      0.78837203   
+     77000   309.62747     -2613.2364      5692.3068      5641.2054     -36.111394      97031.318      0.78837203   
+     77500   310.20791     -2629.2909      5691.8221      6266.3455      405.99425      97031.318      0.78837203   
+     78000   310.77587     -2642.4435      5693.9045      5408.0603     -201.99545      97031.318      0.78837203   
+     78500   310.21958     -2630.0095      5691.4167      5182.1802     -359.85841      97031.318      0.78837203   
+     79000   305.36724     -2499.2628      5692.0025      5888.6976      138.99711      97031.318      0.78837203   
+     79500   309.91695     -2619.9603      5693.3479      4942.9628     -530.26923      97031.318      0.78837203   
+     80000   308.53318     -2583.0701      5693.1195      5391.0354     -213.47158      97031.318      0.78837203   
+     80500   310.87444     -2645.6657      5693.3266      4384.8156     -924.67592      97031.318      0.78837203   
+     81000   306.43699     -2527.8502      5692.1104      5547.0935     -102.47801      97031.318      0.78837203   
+     81500   311.18446     -2654.0104      5693.2978      5231.3611     -326.43342      97031.318      0.78837203   
+     82000   312.26844     -2682.3736      5694.0118      5716.3056      15.754192      97031.318      0.78837203   
+     82500   309.86149     -2617.3004      5694.5201      4663.9935     -728.23475      97031.318      0.78837203   
+     83000   311.14205     -2649.6313      5696.5395      6333.2039      449.907        97031.318      0.78837203   
+     83500   310.62717     -2637.1805      5695.179       4725.1948     -685.45163      97031.318      0.78837203   
+     84000   312.64165     -2692.5552      5693.8412      5171.4508     -369.15383      97031.318      0.78837203   
+     84500   310.43852     -2631.1277      5696.1713      5678.5493     -12.45278       97031.318      0.78837203   
+     85000   309.72365     -2613.5502      5694.573       5617.4408     -54.506488      97031.318      0.78837203   
+     85500   312.03051     -2675.8973      5694.1058      7581.809       1333.9694      97031.318      0.78837203   
+     86000   309.59775     -2608.8352      5695.9107      6711.5163      717.69067      97031.318      0.78837203   
+     86500   308.60327     -2583.8398      5694.2298      5295.1557     -282.01081      97031.318      0.78837203   
+     87000   309.84933     -2614.757       5696.7374      6579.001       623.46275      97031.318      0.78837203   
+     87500   310.72322     -2638.5028      5696.4331      4956.9115     -522.59232      97031.318      0.78837203   
+     88000   307.66897     -2556.4683      5696.5395      6784.8873      769.09482      97031.318      0.78837203   
+     88500   310.44957     -2631.1767      5696.4188      4639.0873     -747.17673      97031.318      0.78837203   
+     89000   310.05933     -2620.6965      5696.4311      5465.2039     -163.39962      97031.318      0.78837203   
+     89500   309.65855     -2609.604       5696.773       6113.0853      294.19242      97031.318      0.78837203   
+     90000   309.21431     -2597.4593      5697.001       5743.3999      32.788336      97031.318      0.78837203   
+     90500   312.42019     -2683.1123      5697.3438      7026.5594      939.30716      97031.318      0.78837203   
+     91000   311.13574     -2647.6063      5698.3951      6007.9489      218.75018      97031.318      0.78837203   
+     91500   310.41189     -2629.0815      5697.5031      5978.4244      198.51663      97031.318      0.78837203   
+     92000   310.14287     -2618.2238      5701.1445      5044.5261     -464.0077       97031.318      0.78837203   
+     92500   308.77833     -2582.9703      5699.7953      6715.6308      717.85308      97031.318      0.78837203   
+     93000   308.10823     -2564.7437      5700.0469      5428.0425     -192.2154       97031.318      0.78837203   
+     93500   308.78332     -2582.9124      5699.9869      7262.5868      1104.2311      97031.318      0.78837203   
+     94000   308.69402     -2579.9248      5700.5791      6202.353       354.5849       97031.318      0.78837203   
+     94500   309.66931     -2605.6482      5701.0171      5140.632      -396.00329      97031.318      0.78837203   
+     95000   310.73411     -2633.3184      5701.9095      5056.7147     -455.9351       97031.318      0.78837203   
+     95500   309.30047     -2595.1522      5701.6194      5755.3246      37.951452      97031.318      0.78837203   
+     96000   310.90488     -2637.8055      5702.0033      5196.771      -357.02883      97031.318      0.78837203   
+     96500   309.01755     -2586.4034      5702.779       5362.0912     -240.7514       97031.318      0.78837203   
+     97000   309.03816     -2586.8903      5702.8451      7025.6188      934.75486      97031.318      0.78837203   
+     97500   310.84374     -2636.4289      5701.7398      5627.255      -52.635612      97031.318      0.78837203   
+     98000   311.66245     -2659.4007      5700.7294      5593.6557     -75.664943      97031.318      0.78837203   
+     98500   311.58739     -2656.2889      5701.8277      4649.4873     -743.64974      97031.318      0.78837203   
+     99000   312.87129     -2691.1807      5701.3757      6819.7459      790.3105       97031.318      0.78837203   
+     99500   310.03949     -2614.6168      5701.9786      5017.5238     -483.67866      97031.318      0.78837203   
+    100000   310.00733     -2613.617       5702.1158      6585.2457      624.07497      97031.318      0.78837203   
+    100500   306.802       -2524.2815      5705.4702      3410.9944     -1621.4205      97031.318      0.78837203   
+    101000   308.88725     -2580.9441      5704.743       5503.0746     -142.51158      97031.318      0.78837203   
+    101500   308.13768     -2560.9016      5704.679       4927.6469     -549.09967      97031.318      0.78837203   
+    102000   311.75061     -2656.8912      5705.6037      5505.3138     -141.53744      97031.318      0.78837203   
+    102500   312.56702     -2677.9242      5706.4703      6541.5785      590.13981      97031.318      0.78837203   
+    103000   309.0886      -2584.0924      5706.9958      5753.7947      33.071089      97031.318      0.78837203   
+    103500   310.30868     -2617.6188      5706.1972      5944.4288      168.34936      97031.318      0.78837203   
+    104000   310.47467     -2621.8837      5706.3849      6641.0071      660.46269      97031.318      0.78837203   
+    104500   307.0143      -2527.2741      5708.1725      6577.9021      614.60545      97031.318      0.78837203   
+    105000   312.74525     -2683.3355      5705.84        6733.1067      725.93108      97031.318      0.78837203   
+    105500   311.64908     -2654.0431      5705.7285      5771.3434      46.367637      97031.318      0.78837203   
+    106000   312.38891     -2673.9814      5705.6356      4591.2181     -787.51727      97031.318      0.78837203   
+    106500   311.04275     -2637.3905      5706.1166      6559.9454      603.36903      97031.318      0.78837203   
+    107000   310.10405     -2613.5925      5704.7345      5859.4564      109.33619      97031.318      0.78837203   
+    107500   310.20024     -2614.0649      5706.8423      6297.3616      417.29799      97031.318      0.78837203   
+    108000   310.08492     -2608.4693      5709.3447      5347.4657     -255.72641      97031.318      0.78837203   
+    108500   308.39629     -2564.4196      5708.0978      5887.008       126.42916      97031.318      0.78837203   
+    109000   313.36853     -2695.709       5710.1855      7500.3273      1265.0265      97031.318      0.78837203   
+    109500   307.43542     -2537.9337      5708.8091      5711.2372      1.7157951      97031.318      0.78837203   
+    110000   308.1738      -2558.2043      5708.3452      4858.969      -600.22249      97031.318      0.78837203   
+    110500   312.8594      -2682.1795      5710.058       4609.9822     -777.38254      97031.318      0.78837203   
+    111000   307.07106     -2524.077       5712.8923      5256.1867     -322.73681      97031.318      0.78837203   
+    111500   307.79612     -2543.3081      5713.1102      5907.2962      137.22402      97031.318      0.78837203   
+    112000   310.14858     -2606.9695      5712.5521      6887.1995      830.07957      97031.318      0.78837203   
+    112500   309.12952     -2579.7024      5712.4836      6212.5074      353.34822      97031.318      0.78837203   
+    113000   313.41401     -2696.133       5710.9813      6802.4491      771.29958      97031.318      0.78837203   
+    113500   309.92927     -2602.5151      5711.1236      6471.5232      537.34604      97031.318      0.78837203   
+    114000   311.97708     -2657.108       5711.4619      4242.3017     -1038.2007      97031.318      0.78837203   
+    114500   312.57538     -2674.4676      5710.1511      5174.1925     -378.742        97031.318      0.78837203   
+    115000   305.98972     -2495.4477      5712.5153      6361.9115      458.90412      97031.318      0.78837203   
+    115500   311.1886      -2634.5476      5712.8717      6054.5721      241.46699      97031.318      0.78837203   
+    116000   304.69296     -2460.5553      5712.6229      6835.5099      793.50239      97031.318      0.78837203   
+    116500   309.49531     -2588.9937      5713.0045      6263.4237      388.96077      97031.318      0.78837203   
+    117000   312.41775     -2665.8481      5714.5423      5647.4182     -47.434105      97031.318      0.78837203   
+    117500   311.70191     -2645.2448      5715.9437      6084.7082      260.59214      97031.318      0.78837203   
+    118000   308.81723     -2568.1297      5715.6793      5675.177      -28.621446      97031.318      0.78837203   
+    118500   309.6559      -2590.6739      5715.6319      6325.9145      431.26393      97031.318      0.78837203   
+    119000   309.34906     -2581.9334      5716.1417      6362.0645      456.44955      97031.318      0.78837203   
+    119500   306.2734      -2496.3113      5719.2612      5717.4432     -1.2847183      97031.318      0.78837203   
+    120000   308.72742     -2562.3823      5719.0176      6197.2751      337.96674      97031.318      0.78837203   
+    120500   309.67419     -2585.9693      5720.8272      6890.4132      826.50286      97031.318      0.78837203   
+    121000   309.1995      -2572.9894      5721.0737      6216.727       350.25971      97031.318      0.78837203   
+    121500   310.05381     -2594.2574      5722.7222      5893.3761      120.59476      97031.318      0.78837203   
+    122000   310.32055     -2604.6963      5719.4383      5162.5021     -393.56606      97031.318      0.78837203   
+    122500   307.57955     -2530.042       5720.567       5219.1876     -354.30611      97031.318      0.78837203   
+    123000   311.2732      -2629.0471      5720.6415      5113.6354     -428.9486       97031.318      0.78837203   
+    123500   307.66589     -2529.7544      5723.1708      5247.7042     -335.99456      97031.318      0.78837203   
+    124000   312.94025     -2671.9326      5722.4737      5718.4082     -2.8729117      97031.318      0.78837203   
+    124500   312.8225      -2667.6998      5723.5478      6548.804       583.17777      97031.318      0.78837203   
+    125000   313.3437      -2682.1008      5723.1278      7394.1592      1180.8556      97031.318      0.78837203   
+    125500   313.66966     -2692.978       5720.9941      6031.4681      219.40043      97031.318      0.78837203   
+    126000   306.51893     -2498.3397      5723.819       4722.7614     -707.41009      97031.318      0.78837203   
+    126500   309.60322     -2579.8921      5725.0005      5776.4341      36.346167      97031.318      0.78837203   
+    127000   311.18142     -2622.3783      5724.8485      6236.2929      361.41869      97031.318      0.78837203   
+    127500   313.32025     -2679.8426      5724.7567      4573.201      -813.76152      97031.318      0.78837203   
+    128000   310.57559     -2604.0245      5726.9513      6725.2262      705.44362      97031.318      0.78837203   
+    128500   311.05457     -2616.0508      5727.7734      5311.6373     -294.06785      97031.318      0.78837203   
+    129000   310.19089     -2593.2083      5727.4483      5115.7024     -432.29798      97031.318      0.78837203   
+    129500   313.11215     -2670.137       5728.8802      6117.0009      274.27043      97031.318      0.78837203   
+    130000   310.92641     -2612.8208      5727.5655      6966.3068      875.37231      97031.318      0.78837203   
+    130500   309.95725     -2586.2245      5728.1649      5327.6521     -283.02744      97031.318      0.78837203   
+    131000   306.06072     -2481.7714      5728.0962      5498.9789     -161.9086       97031.318      0.78837203   
+    131071   311.6972      -2634.474       5726.5883      4946.2617     -551.42767      97031.318      0.78837203   
+Loop time of 1187.4 on 20 procs for 131071 steps with 9000 atoms
+
+Performance: 15.260 ns/day, 1.573 hours/ns, 110.385 timesteps/s, 993.461 katom-step/s
+99.3% CPU use with 20 MPI tasks x 1 OpenMP threads
+
+MPI task timing breakdown:
+Section |  min time  |  avg time  |  max time  |%varavg| %total
+---------------------------------------------------------------
+Pair    | 284.95     | 289.93     | 295.96     |  16.0 | 24.42
+Bond    | 205.17     | 206.79     | 209.32     |   7.1 | 17.42
+Kspace  | 338.48     | 342.31     | 345.68     |   8.9 | 28.83
+Neigh   | 33.967     | 33.983     | 33.995     |   0.1 |  2.86
+Comm    | 83.134     | 87.988     | 91.254     |  22.4 |  7.41
+Output  | 190.1      | 191.83     | 193.79     |   7.7 | 16.16
+Modify  | 23.473     | 23.758     | 24.073     |   3.5 |  2.00
+Other   |            | 10.81      |            |       |  0.91
+
+Nlocal:            450 ave         473 max         422 min
+Histogram: 2 0 1 3 1 5 1 3 2 2
+Nghost:         3096.7 ave        3147 max        3051 min
+Histogram: 3 1 0 4 3 3 2 1 1 2
+Neighs:        66579.3 ave       70274 max       60446 min
+Histogram: 1 1 0 2 2 1 4 5 2 2
+
+Total # of neighbors = 1331586
+Ave neighs/atom = 147.954
+Ave special neighs/atom = 7.3333333
+Neighbor list builds = 8637
+Dangerous builds = 0
+Total wall time: 0:19:49

@@ -1,0 +1,49 @@
+# LAMMPS script to collect vibrational data for ethanol system
+
+log            vacf.log
+
+neigh_modify   every 1 delay 0 check yes
+
+units          real
+boundary       p p p
+atom_style     full
+newton         off
+
+### Potential styles
+pair_style     lj/long/coul/long long long 6.0
+kspace_style   pppm/disp 1e-4
+kspace_modify  force/disp/real 1e-4 force/disp/kspace 2e-3
+bond_style     harmonic
+angle_style    harmonic
+dihedral_style opls
+special_bonds  lj/coul 0.0 0.0 0.5
+
+read_data      equil_NVE1.data
+
+variable       mols_per_group equal 10
+
+variable       n loop 20
+label          LOOP1
+	variable i1 equal ((${n}-1)*${mols_per_group}+1)
+	variable i2 equal (${i1}+${mols_per_group}-1)
+
+	group sample${n} molecule ${i1}:${i2}
+next           n
+jump           SELF LOOP1
+
+timestep       1.6
+run_style      respa 4 2 2 2 bond 1 dihedral 2 pair 3 kspace 4
+
+thermo         500
+thermo_style   custom step temp pe etotal enthalpy press vol density
+
+fix            1 all nve
+
+variable       n loop 20
+label          LOOP2
+	variable dump_id equal (${n}+0)
+	dump ${dump_id} sample${n} custom 1 velocities${n}.dump id type vx vy vz
+next           n
+jump           SELF LOOP2
+
+run            131071 # 2^17 - 1
