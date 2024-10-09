@@ -15,6 +15,9 @@ Contents:
 		the LAMMPS log for the MD trajectory
 	velocities\*.dump
 		velocity output data for different samples from the MD trajectory
+		
+		Note: these are heavily truncated versions of the files so they may be
+		uploaded to GitHub
 	dump2VDoS.py
 		script to compute the velocity autocorrelation function (VACF) and VDoS
 		from the dump files
